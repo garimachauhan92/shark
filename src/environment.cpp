@@ -154,8 +154,8 @@ void Environment::remove_tidal_stripped_stars(Galaxy &galaxy, float lost_stellar
 }
 
 
-void Environment::remove_all_gas(Subhalo &satellite_subhalo, Subhalo &central_subhalo, Galaxy &galaxy){
-	if(parameters.stripping){
+void Environment::remove_all_gas(Subhalo &satellite_subhalo, Subhalo &central_subhalo, Galaxy &central, Galaxy &satellite){
+	if(parameters.trial_model){
 
 		central_subhalo.ejected_galaxy_gas 	+= satellite_subhalo.ejected_galaxy_gas;
 		central_subhalo.lost_galaxy_gas 	+= satellite_subhalo.lost_galaxy_gas;
@@ -163,24 +163,23 @@ void Environment::remove_all_gas(Subhalo &satellite_subhalo, Subhalo &central_su
 		satellite_subhalo.ejected_galaxy_gas.restore_baryon();
 		satellite_subhalo.lost_galaxy_gas.restore_baryon();
 
-		if(parameters.trial_model){
-			if(satellite_subhalo.hot_halo_gas > 0 || satellite_subhalo.cold_halo_gas > 0){
+		
+		
 
-				central_subhalo.hot_halo_gas += satellite_subhalo.hot_halo_gas;
-				central_subhalo.hot_halo_gas += satellite_subhalo.hot_halo_gas;
+		central_subhalo.hot_halo_gas += satellite_subhalo.hot_halo_gas;
+		central_subhalo.hot_halo_gas += satellite_subhalo.hot_halo_gas;
 
-				satellite_subhalo.hot_halo_gas.restore_baryon();
-				satellite_subhalo.cold_halo_gas.restore_baryon();
+		satellite_subhalo.hot_halo_gas.restore_baryon();
+		satellite_subhalo.cold_halo_gas.restore_baryon();
 
-				central.gas_mass() += satellite.gas_mass();
-				satellite.gas_mass().restore_baryon();
+		central.disk_gas.mass += satellite.disk_gas.mass;
+		satellite.disk_gas.restore_baryon();
 
-			}
 		}
 
 		
 	}
-}
+
 
 
 } // namespace shark

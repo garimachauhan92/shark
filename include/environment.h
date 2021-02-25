@@ -44,6 +44,7 @@ public:
 	bool stripping = true;
 	bool tidal_stripping = false;
 	float minimum_halo_mass_fraction = 0.01;
+	bool trial_model = true;
 
 };
 
@@ -54,6 +55,7 @@ public:
 
 	void process_satellite_subhalo_environment (Subhalo &satellite_subhalo, Subhalo &central_subhalo);
 	void remove_tidal_stripped_stars(Galaxy &galaxy, float lost_stellar_mass, float lost_stellar_mass_metals);
+	void remove_all_gas(Subhalo &satellite_subhalo, Subhalo &central_subhalo, Galaxy &central, Galaxy &satellite);
 
 private:
 
