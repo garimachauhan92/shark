@@ -174,7 +174,8 @@ void Environment::remove_all_gas(Subhalo &satellite_subhalo, Subhalo &central_su
 
 		central.disk_gas.mass += satellite.disk_gas.mass;
 		// satellite.gas_mass().restore_baryon();
-		satellite.disk_gas.mass = 0;
+		satellite.disk_gas.restore_baryon();
+		central.disk_gas.restore_baryon();
 		// double satellite_mass = satellite.disk_gas.mass;
 		// satellite_mass.restore_baryon()
 
